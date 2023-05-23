@@ -44,39 +44,7 @@ header {
   gap: 30px;
 }
 
-.card {
-  border: 1px solid #f1ecec;
-  padding: 25px;
-  width: 210px;
-  border-radius: 40px;
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-  // cursor: pointer;
 
-  &:hover {
-    box-shadow: 0px 15px 30px rgba($color: #000000, $alpha: 0.06);
-    transform: translateY(-5px);
-  }
-
-  .favourite {
-    position: absolute;
-    cursor: pointer;
-  }
-
-  span {
-    opacity: 0.5;
-    font-size: 13px;
-    text-transform: uppercase;
-  }
-
-  b {
-    font-size: 13px;
-  }
-
-  h5 {
-    font-weight: 400;
-    font-size: 14px;
-  }
-}
 
 .button {
   width: 32px;
