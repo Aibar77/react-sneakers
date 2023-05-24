@@ -1,87 +1,69 @@
 import React from "react";
 
-export default function Drawer() {
+export default function Drawer({ onClose, items = [], onRemoveCart }) {
   return (
     <div
-      style={{
-        display: "none",
-      }}
       className="overlay"
+      onClick={(e) => {
+        if (e.target.classList.contains("overlay")) {
+          onClose();
+        }
+      }}
     >
       <div className="drawer">
         <h2 className="mb-30 d-flex justify-between">
           Корзина{" "}
           <img
-            className="removeBtn"
+            onClick={onClose}
+            className="removeBtn cu-p"
             src="/img/Btn-Remove.svg"
-            alt="removebtn"
+            alt="close"
           />
         </h2>
 
         <div className="items">
-          <div className="cartItem d-flex align-center mb-20">
-            <div
-              style={{
-                backgroundImage: "url(/img/sneakers/1.jpg)",
-              }}
-              className="cartItemImg"
-            ></div>
-            <div className="mr-20 flex">
-              <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
+          {items.map(({ name, price, id }) => (
+            <div className="cartItem d-flex align-center mb-20" key={id}>
+              <div
+                style={{
+                  backgroundImage: `url(/img/sneakers/${id}.jpg)`,
+                }}
+                className="cartItemImg"
+              ></div>
+              <div className="mr-20 flex">
+                <p className="mb-5">{name}</p>
+                <b>{price} руб.</b>
+              </div>
+              <img
+                onClick={() => onRemoveCart(id)}
+                className="removeBtn"
+                src="/img/Btn-Remove.svg"
+                alt="removebtn"
+              />
             </div>
-            <img
-              className="removeBtn"
-              src="/img/Btn-Remove.svg"
-              alt="removebtn"
-            />
-          </div>
-          <div className="cartItem d-flex align-center mb-20">
-            <div
-              style={{
-                backgroundImage: "url(/img/sneakers/2.jpg)",
-              }}
-              className="cartItemImg"
-            ></div>
-            <div className="mr-20 flex">
-              <p className="mb-5">Мужские Кроссовки Nike Air Max 200</p>
-              <b>8 999 руб.</b>
-            </div>
-            <img
-              className="removeBtn"
-              src="/img/Btn-Remove.svg"
-              alt="removebtn"
-            />
-          </div>
-          <div className="cartItem d-flex align-center mb-20">
-            <div
-              style={{
-                backgroundImage: "url(/img/sneakers/3.jpg)",
-              }}
-              className="cartItemImg"
-            ></div>
-            <div className="mr-20 flex">
-              <p className="mb-5">Мужские Кроссовки Nike Air Max 300</p>
-              <b>9 999 руб.</b>
-            </div>
-            <img
-              className="removeBtn"
-              src="/img/Btn-Remove.svg"
-              alt="removebtn"
-            />
-          </div>
+          ))}
         </div>
         <div className="cartTotalBlock">
           <ul>
             <li>
               <span>Итого: </span>
               <div></div>
-              <b>21 498 руб. </b>
+              <b>
+                {items
+                  .map((item) => item.price.split(" ").join(""))
+                  .reduce((acc, num) => acc + Number(num), 0)}{" "}
+                руб.
+              </b>
             </li>
             <li>
               <span>Налог 5%: </span>
               <div></div>
-              <b>1074 руб. </b>
+              <b>
+                {items
+                  .map((item) => item.price.split(" ").join(""))
+                  .reduce((acc, num) => acc + Number(num), 0) / 20}{" "}
+                руб.{" "}
+              </b>
             </li>
           </ul>
           <button className="greenButton">

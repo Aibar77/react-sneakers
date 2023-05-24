@@ -1,12 +1,25 @@
 import styles from "./Card.module.scss";
-function Card({ name, price, id }) {
-  const onClickBtn = () => {
-    alert(id);
+import React from "react";
+function Card({ name, price, id, onPlus, onFavourite, onRemoveCart }) {
+  const [isAdded, setIsAdded] = React.useState(false);
+
+  const onClickPlus = () => {
+    if (isAdded) {
+      onRemoveCart(id);
+    } else {
+      onPlus();
+    }
+    setIsAdded(!isAdded);
   };
+
   return (
     <div className={styles.card}>
       <div className={styles.favourite}>
-        <img src="/img/Heart-Unlike.svg" alt="heart-unlike" />
+        <img
+          src="/img/Heart-Unlike.svg"
+          alt="heart-unlike"
+          onClick={onFavourite}
+        />
       </div>
       <img
         width={133}
@@ -18,11 +31,14 @@ function Card({ name, price, id }) {
       <div className="d-flex justify-between align-center">
         <div className="d-flex flex-column">
           <span>Цена:</span>
-          <b>{price}</b>
+          <b>{price + " руб."}</b>
         </div>
-        <button className="button" onClick={onClickBtn}>
-          <img width={11} height={11} src="/img/Plus.svg" alt="plussign" />
-        </button>
+        <img
+          className={styles.plus}
+          src={`/img/Btn-${isAdded ? "Checked" : "Plus"}.svg`}
+          onClick={onClickPlus}
+          alt="plussign"
+        />
       </div>
     </div>
   );
