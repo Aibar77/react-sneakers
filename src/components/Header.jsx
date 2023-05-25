@@ -19,6 +19,9 @@ function Header({ onClickCart, items }) {
             руб.
           </span>
         </li>
+        <li className="mr-20 cu-p">
+          <img width={18} height={18} src="/img/Fav.svg" alt="Fav" />
+        </li>
         <li>
           <img width={18} height={18} src="/img/User.svg" alt="User" />
         </li>
